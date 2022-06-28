@@ -31,7 +31,7 @@ func NewDefaultLogger(format, level string, trace bool) (Logger, error) {
 	switch strings.ToLower(format) {
 	case LogFormatPlain, LogFormatText:
 		logWriter = zerolog.ConsoleWriter{
-			Out:        os.Stderr,
+			Out:        os.Stdout,
 			NoColor:    true,
 			TimeFormat: time.RFC3339,
 			FormatLevel: func(i interface{}) string {
@@ -43,7 +43,7 @@ func NewDefaultLogger(format, level string, trace bool) (Logger, error) {
 		}
 
 	case LogFormatJSON:
-		logWriter = os.Stderr
+		logWriter = os.Stdout
 
 	default:
 		return nil, fmt.Errorf("unsupported log format: %s", format)
